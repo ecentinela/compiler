@@ -1,21 +1,22 @@
 <?php
 
 function help() {
-	echo "Optimize a single image or a whole folder in the cloud.\n";
-	echo "\n";
-	echo "gif's:\n";
-	echo "  - called with a folder gif`s will not be optimized\n";
-	echo "  - called on a singe .gif, it will be optimized if it is optimizeable\n";
+	echo "Compiles a single javascript file or a whole folder in the cloud.\n";
 	echo "\n";
 	echo "Usage:\n";
-	echo "  php smusher.php /images [options]\n";
-	echo "  php smusher.php /images/x.png [options]\n";
+	echo "  php compile.php /javascripts [options]\n";
+	echo "  php compile.php /javascripts/myfile.js [options]\n";
 	echo "\n";
 	echo "Options are:\n";
 	echo str_pad("  -q, --quiet", 26, " ") . "no output\n";
-	echo str_pad("  -c, --convert-gifs", 26, " ") . "convert all .gif's in the given folder\n";
-	echo str_pad("  -pc, --pretend", 26, " ") . "no changes are made\n";
+	echo str_pad("  -p, --pretend", 26, " ") . "no changes are made\n";
 	echo str_pad("  -r, --recursive", 26, " ") . "execute the action on all subdirectories\n";
+	echo str_pad("  -w, --supress_warnings", 26, " ") . "don't show compilation warnings\n";
+	echo str_pad("  -l, --compilation_level", 26, " ") . "compilation level\n";
+	echo str_repeat(" ", 26) . "WHITESPACE_ONLY\n";
+	echo str_repeat(" ", 26) . "SIMPLE_OPTIMIZATIONS (default)\n";
+	echo str_repeat(" ", 26) . "ADVANCED_OPTIMIZATIONS\n";
+	echo str_pad("  -j, --join", 26, " ") . "if folder is given js files are joined in all.min.js\n";
 	echo str_pad("  -h, --help", 26, " ") . "show this\n";
 
 	exit;
@@ -39,7 +40,7 @@ foreach ($arguments as $arg) {
 
 	switch ($arg) {
 		case '--supress_warnings':
-		case '-nw':
+		case '-w':
 			$options[] = 'supress_warnings';
 			break;
 
