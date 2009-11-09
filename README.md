@@ -14,8 +14,8 @@ Usage
 Compiles a single javascript file or a whole folder in the cloud.
 
 Usage:
-    php compile.php /javascripts [options]
-    php compile.php /javascripts/myfile.js [options]
+    php compiler.php /javascripts [options]
+    php compiler.php /javascripts/myfile.js [options]
 
 Options are:
     -q, --quiet                      no output
@@ -36,7 +36,7 @@ Any file that returns a failure code, is larger than before, or is empty will no
 
 Example
 =======
-    php compile.php /javascripts
+    php compiler.php /javascripts
       compiling /javascripts/applications.js
       2887 -> 132 (102 gzip)                   = 4% (3% gzip)
 
