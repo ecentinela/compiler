@@ -10,7 +10,7 @@ Class compiler {
 		$quiet = in_array('quiet', $options);
 		$pretend = in_array('pretend', $options);
 		$recursive = in_array('recursive', $options);
-		$join = in_array('join', $options);
+		$combine = in_array('combine', $options);
 		$supress_warnings = in_array('supress_warnings', $options);
 		$compilation_level = in_array('compilation_level', $options) ? $options['compilation_level'] : 'SIMPLE_OPTIMIZATIONS';
 
@@ -25,7 +25,7 @@ Class compiler {
 
 		// is the path is a folder, we get all javascript files on these folder
 		if (is_dir($path))
-			self::folder($curl, $path, $quiet, $pretend, $recursive, $join, $supress_warnings, $compilation_level);
+			self::folder($curl, $path, $quiet, $pretend, $recursive, $combine, $supress_warnings, $compilation_level);
 		else
 			self::file($curl, $path, $quiet, $pretend, $supress_warnings, $compilation_level);
 
@@ -33,7 +33,7 @@ Class compiler {
 		curl_close($curl);
 	}
 
-	private static function folder($curl, $folder_path, $quiet, $pretend, $recursive, $join, $supress_warnings, $compilation_level) {
+	private static function folder($curl, $folder_path, $quiet, $pretend, $recursive, $combine, $supress_warnings, $compilation_level) {
 		// loop through all files on the folder to get javascript files
 		$it = new DirectoryIterator($folder_path);
 
@@ -45,7 +45,7 @@ Class compiler {
 				// if it's a folder, scan it too
 				if ($file->isDir()) {
 					if ($recursive)
-						self::folder($curl, $path, $quiet, $pretend, $recursive, $join, $supress_warnings, $compilation_level);
+						self::folder($curl, $path, $quiet, $pretend, $recursive, $combine, $supress_warnings, $compilation_level);
 				}
 				elseif (preg_match('/(?<!\.min)\.js$/i', $path))
 					$files[] = $path;
@@ -53,7 +53,7 @@ Class compiler {
 
 		if (count($files) > 0)
 			// combine the files before sending the code to google
-			if ($join) {
+			if ($combine) {
 				foreach ($files as $path)
 					$code[] = file_get_contents($path);
 

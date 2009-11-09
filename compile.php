@@ -16,7 +16,7 @@ function help() {
 	echo str_repeat(" ", 26) . "WHITESPACE_ONLY\n";
 	echo str_repeat(" ", 26) . "SIMPLE_OPTIMIZATIONS (default)\n";
 	echo str_repeat(" ", 26) . "ADVANCED_OPTIMIZATIONS\n";
-	echo str_pad("  -j, --join", 26, " ") . "if folder is given js files are joined in all.min.js\n";
+	echo str_pad("  -c, --combine", 26, " ") . "if folder is given js files are combined in all.min.js\n";
 	echo str_pad("  -h, --help", 26, " ") . "show this\n";
 
 	exit;
@@ -44,9 +44,9 @@ foreach ($arguments as $arg) {
 			$options[] = 'supress_warnings';
 			break;
 
-		case '--join':
-		case '-j':
-			$options[] = 'join';
+		case '--combine':
+		case '-c':
+			$options[] = 'combine';
 			break;
 
 		case '--quiet':
