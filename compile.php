@@ -65,14 +65,17 @@ Class compile {
 			}
 			// send every file code separately
 			else
-				foreach ($files as $path) {
-					$code = file_get_contents($path);
+				foreach ($files as $path)
+					self::file($curl, $path, $quiet, $pretend, $supress_warnings, $compilation_level);
+	}
 
-					self::code($curl, $path, $code, $quiet, $pretend, $supress_warnings, $compilation_level);
+	private static function file($curl, $path, $quiet, $pretend, $supress_warnings, $compilation_level) {
+		$code = file_get_contents($path);
 
-					if (!$quiet)
-						echo "\n";
-				}
+		self::code($curl, $path, $code, $quiet, $pretend, $supress_warnings, $compilation_level);
+
+		if (!$quiet)
+			echo "\n";
 	}
 
 	private static function code($curl, $path, $code, $quiet, $pretend, $supress_warnings, $compilation_level) {
